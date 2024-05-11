@@ -6,7 +6,9 @@
     "lib": [
       "esnext"
     ],
+    "allowJs": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     // "paths": {
     //   "src/*": [
     //     "./src/*"

@@ -1,6 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 
-export const getApp = async (req: Request, res: Response) => {
+const appRouter = Router();
+
+appRouter.get("/", async (req: Request, res: Response) => {
+  /*#swagger.tags = ['App']
+    #swagger.description = 'This is the root route'*/
   res.send("Hello World");
-};
+});
 
+export default appRouter;
