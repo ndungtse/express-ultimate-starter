@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    // "jsx": "react-jsx",     
+    "module": "commonjs",
+    // "moduleResolution": "NodeNext",
+    "typeRoots": [
+      "./src/env.d.ts",
+    ],
+    "allowJs": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
