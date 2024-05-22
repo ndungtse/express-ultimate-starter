@@ -1,12 +1,15 @@
 import { Router } from "express";
 import prisma from "../config/prisma";
 import { UserRequest } from "../types";
-import ApiResponse from "../types/ApiResponse";
+import ApiResponse from "../utils/ApiResponse";
 
 const userRouter = Router();
 
 userRouter.get("/", async (req, res) => {
   /* #swagger.tags = ['User'] */
+   /* #swagger.security = [{
+            "authToken": []
+    }] */
   try {
     const users = await prisma.user.findMany();
     res
@@ -23,6 +26,9 @@ userRouter.get("/", async (req, res) => {
 
 userRouter.get("/me", async (req: UserRequest, res) => {
   /* #swagger.tags = ['User'] */
+   /* #swagger.security = [{
+            "authToken": []
+    }] */
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -47,6 +53,9 @@ userRouter.get("/me", async (req: UserRequest, res) => {
 
 userRouter.get("/:id", async (req, res) => {
   /* #swagger.tags = ['User'] */
+   /* #swagger.security = [{
+            "authToken": []
+    }] */
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -71,6 +80,9 @@ userRouter.get("/:id", async (req, res) => {
 
 userRouter.put("/:id", async (req, res) => {
   /* #swagger.tags = ['User'] */
+   /* #swagger.security = [{
+            "authToken": []
+    }] */
   try {
     const { email, fullName, phoneNumber } = req.body;
     const user = await prisma.user.update({
@@ -96,6 +108,9 @@ userRouter.put("/:id", async (req, res) => {
 
 userRouter.delete("/:id", async (req, res) => {
   /* #swagger.tags = ['User'] */
+   /* #swagger.security = [{
+            "authToken": []
+    }] */
   try {
     await prisma.user.delete({
       where: {

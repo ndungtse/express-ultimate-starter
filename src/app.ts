@@ -6,13 +6,23 @@ import router from "./routes";
 import swagger from "./swagger";
 import swaggerFile from "../swagger-output.json";
 
+const APP_NAME = "Node.js Express API with Swagger Documentation and TypeScript";
+
 dotEnv.config();
 const app = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 app.use(cors());
 
+app.get("/", (req, res) => {
+  /* #swagger.tags = ['App'] */
+  res.send(`
+  <h1>${APP_NAME}</h1>
+  <p>Documentation can be found at <a href="/api-docs">/api-docs</a></p>
+  `);
+});
 app.use(router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 
 const PORT = process.env.PORT || 3000;
 

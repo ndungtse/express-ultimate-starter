@@ -2,7 +2,7 @@ import { Router } from "express";
 import prisma from "../config/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import ApiResponse from "../types/ApiResponse";
+import ApiResponse from "../utils/ApiResponse";
 
 const AuthRouter = Router();
 
