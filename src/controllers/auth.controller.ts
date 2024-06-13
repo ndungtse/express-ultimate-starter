@@ -1,8 +1,10 @@
-import { Router } from "express";
-import prisma from "../config/prisma";
 import bcrypt from "bcrypt";
+import { Router } from "express";
 import jwt from "jsonwebtoken";
+import prisma from "../config/prisma";
 import ApiResponse from "../utils/ApiResponse";
+import { handleErrorResponse } from "../utils/errorHandler";
+import { registerSchema } from "../validations/schemas";
 
 const AuthRouter = Router();
 
@@ -11,9 +13,10 @@ AuthRouter.post("/register", async (req, res) => {
     #swagger.tags = ['Auth']
      */
   try {
+    await registerSchema.parseAsync(req.body);
     const { email, password, fullName } = req.body;
-    if (!email || !password || !fullName)
-      return res.status(400).json({ message: "Please fill all fields" });
+    // if (!email || !password || !fullName)
+    //   return res.status(400).json({ message: "Please fill all fields" });
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
       data: {
@@ -26,11 +29,7 @@ AuthRouter.post("/register", async (req, res) => {
       .status(201)
       .json(new ApiResponse(user, "User created successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
@@ -62,11 +61,7 @@ AuthRouter.post("/login", async (req, res) => {
         new ApiResponse({ user, token }, "User logged in successfully", true)
       );
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 

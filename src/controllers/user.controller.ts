@@ -2,6 +2,7 @@ import { Router } from "express";
 import prisma from "../config/prisma";
 import { UserRequest } from "../types";
 import ApiResponse from "../utils/ApiResponse";
+import { handleErrorResponse } from "../utils/errorHandler";
 
 const userRouter = Router();
 
@@ -16,11 +17,7 @@ userRouter.get("/", async (req, res) => {
       .status(200)
       .json(new ApiResponse(users, "Users fetched successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
@@ -43,11 +40,7 @@ userRouter.get("/me", async (req: UserRequest, res) => {
       .status(200)
       .json(new ApiResponse(user, "User fetched successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
@@ -70,11 +63,7 @@ userRouter.get("/:id", async (req, res) => {
       .status(200)
       .json(new ApiResponse(user, "User fetched successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
@@ -98,11 +87,7 @@ userRouter.put("/:id", async (req, res) => {
       .status(200)
       .json(new ApiResponse(user, "User updated successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
@@ -121,11 +106,7 @@ userRouter.delete("/:id", async (req, res) => {
       .status(200)
       .json(new ApiResponse(null, "User deleted successfully", true));
   } catch (error: any) {
-    res
-      .status(500)
-      .json(
-        new ApiResponse(null, "Internal server error", false, error?.message)
-      );
+    handleErrorResponse(res, error);
   }
 });
 
