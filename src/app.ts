@@ -21,7 +21,13 @@ app.get("/", (req, res) => {
   `);
 });
 app.use(router);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
+  swaggerOptions: {
+     docExpansion: 'none',
+     explorer: true,
+     tagsSorter: 'alpha',
+  },
+}));
 
 
 const PORT = process.env.PORT || 3000;
