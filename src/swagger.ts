@@ -25,11 +25,11 @@ const doc = {
     },
   ],
   securityDefinitions: {
-    apiKeyAuth: {
+    authToken: {
       type: "apiKey",
-      in: "header", // can be "header", "query" or "cookie"
-      name: "X-API-KEY", // name of the header, query parameter or cookie
-      description: "any description...",
+      in: "header",
+      name: "Authorization",
+      description: "Authorization token",
     },
   },
   definitions: {
@@ -63,7 +63,6 @@ const doc = {
   },
 };
 
-
 const outputFile = "../swagger-output.json";
 const endpointsFiles = ["./app"];
 
@@ -71,4 +70,8 @@ const endpointsFiles = ["./app"];
 root file where the route starts, such as index.js, app.js, routes.js, etc ... */
 
 // swaggerAutogen()(outputFile, routes, doc);
-export default swaggerAutogen()(outputFile, endpointsFiles, doc)
+export default swaggerAutogen({ openapi: "3.0.0" })(
+  outputFile,
+  endpointsFiles,
+  doc
+);
