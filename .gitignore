@@ -7,6 +7,12 @@ bun.lockb
 
 .env
 .idea
+.gitignore
+
+.env.local
+.env.*.local
+.env.production
+.env.development
+branch_structure.json
 temp_auto_push.bat
 temp_interactive_push.bat
-.gitignore
